@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ІС супроводу працевлаштування</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <h1><i data-feather="briefcase"></i> Інформаційна система супроводу працевлаштування</h1>
+        </header>
+
+        <section class="controls card">
+            <label for="candidateSelect">Оберіть кандидата</label>
+            <div class="row candidate-search-row">
+                <input id="candidateSearch" type="text" placeholder="Пошук кандидата за ПІБ">
+                <button id="clearSearchBtn" type="button">
+                    <i data-feather="x-circle"></i>
+                    Очистити
+                </button>
+            </div>
+            <div class="row candidate-filters-row">
+                <select id="candidateSelect"></select>
+                <select id="minMatchPercent">
+                    <option value="0">Мін. збіг: 0%</option>
+                    <option value="25">Мін. збіг: 25%</option>
+                    <option value="50">Мін. збіг: 50%</option>
+                    <option value="75">Мін. збіг: 75%</option>
+                </select>
+                <select id="levelFilter">
+                    <option value="">Рівень: будь-який</option>
+                    <option value="trainee">Trainee</option>
+                    <option value="junior">Junior</option>
+                    <option value="middle">Middle</option>
+                    <option value="lead">Lead</option>
+                </select>
+                <select id="specializationFilter">
+                    <option value="">Спеціалізація: будь-яка</option>
+                    <option value="developer">Developer</option>
+                    <option value="frontend">Frontend</option>
+                    <option value="backend">Backend</option>
+                    <option value="designer">Designer</option>
+                    <option value="analyst">Analyst</option>
+                </select>
+                <button id="loadBtn" type="button">
+                    <i data-feather="search"></i>
+                    Отримати збіги
+                </button>
+            </div>
+            <div class="row candidate-pagination-row">
+                <button id="prevCandidatesBtn" type="button">
+                    <i data-feather="chevron-left"></i>
+                    Попередні
+                </button>
+                <button id="nextCandidatesBtn" type="button">
+                    Наступні
+                    <i data-feather="chevron-right"></i>
+                </button>
+                <p id="candidatePageInfo"></p>
+            </div>
+        </section>
+
+        <section class="card">
+            <details class="recruiter-dropdown" open>
+                <summary><i data-feather="chevron-right" class="chevron-icon"></i> Панель рекрутера: Додати кандидата</summary>
+                <form id="candidateForm" class="form-grid">
+                    <label for="candidateName">ПІБ кандидата</label>
+                    <input id="candidateName" name="full_name" type="text" required>
+
+                    <label for="candidateLevel">Рівень</label>
+                    <select id="candidateLevel" name="level" required>
+                        <option value="trainee">Trainee</option>
+                        <option value="junior">Junior</option>
+                        <option value="middle">Middle</option>
+                        <option value="lead">Lead</option>
+                    </select>
+
+                    <label for="candidateDesiredPosition">Спеціалізація</label>
+                    <select id="candidateDesiredPosition" name="desired_position" required>
+                        <option value="developer">Developer</option>
+                        <option value="designer">Designer</option>
+                        <option value="analyst">Analyst</option>
+                    </select>
+
+                    <label for="candidateSkillsSelect">Технології (оберіть кілька)</label>
+                    <select id="candidateSkillsSelect" name="skills_select" multiple required>
+                        <option value="Python">Python</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="TypeScript">TypeScript</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="SQL">SQL</option>
+                        <option value="FastAPI">FastAPI</option>
+                        <option value="React">React</option>
+                        <option value="Figma">Figma</option>
+                        <option value="Git">Git</option>
+                        <option value="Docker">Docker</option>
+                    </select>
+
+                    <button type="submit">
+                        <i data-feather="user-plus"></i>
+                        Додати кандидата
+                    </button>
+                </form>
+            </details>
+            <p id="candidateFormStatus" class="status-text"></p>
+        </section>
+
+        <section class="card">
+            <details class="recruiter-dropdown">
+                <summary><i data-feather="chevron-right" class="chevron-icon"></i> Панель рекрутера: Додати вакансію</summary>
+                <form id="vacancyForm" class="form-grid">
+                    <label for="vacancyTitle">Назва вакансії</label>
+                    <input id="vacancyTitle" name="title" type="text" required>
+
+                    <label for="vacancyCompany">Компанія</label>
+                    <input id="vacancyCompany" name="company" type="text" required>
+
+                    <label for="vacancyLevel">Рівень вакансії</label>
+                    <select id="vacancyLevel" name="level" required>
+                        <option value="trainee">Trainee</option>
+                        <option value="junior">Junior</option>
+                        <option value="middle">Middle</option>
+                        <option value="lead">Lead</option>
+                    </select>
+
+                    <label for="vacancySpecialization">Спеціалізація</label>
+                    <select id="vacancySpecialization" name="specialization" required>
+                        <option value="developer">Developer</option>
+                        <option value="designer">Designer</option>
+                        <option value="analyst">Analyst</option>
+                    </select>
+
+                    <label for="vacancyDescription">Опис</label>
+                    <textarea id="vacancyDescription" name="description" rows="3" required></textarea>
+
+                    <label for="vacancySkillsSelect">Технології (оберіть кілька)</label>
+                    <select id="vacancySkillsSelect" name="required_skills_select" multiple required>
+                        <option value="Python">Python</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="TypeScript">TypeScript</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="SQL">SQL</option>
+                        <option value="FastAPI">FastAPI</option>
+                        <option value="React">React</option>
+                        <option value="Figma">Figma</option>
+                        <option value="Git">Git</option>
+                        <option value="Docker">Docker</option>
+                    </select>
+
+                    <button type="submit">
+                        <i data-feather="briefcase"></i>
+                        Додати вакансію
+                    </button>
+                </form>
+            </details>
+            <p id="vacancyFormStatus" class="status-text"></p>
+        </section>
+
+        <section class="card">
+            <h2>Результати метчингу</h2>
+            <div id="results"></div>
+        </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
