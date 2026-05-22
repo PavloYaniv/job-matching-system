@@ -1,5 +1,5 @@
 const API_BASE_URL = "/api";
-
+const API_BASE = 'http://localhost:8000';
 const candidateSelect = document.getElementById("candidateSelect");
 const candidateSearchInput = document.getElementById("candidateSearch");
 const clearSearchBtn = document.getElementById("clearSearchBtn");
